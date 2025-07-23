@@ -10,13 +10,13 @@ public class DialogueTrigger : MonoBehaviour
 
     [SerializeField] bool playOnStart = false;
     [SerializeField] private TextAsset inkJson;
-    
+
     public void Start()
     {
         //could add a delay or transition
         if (playOnStart)
         {
-            startDialogue();
+            StartCoroutine(shortPause());
         }
     }
     public void startDialogue()
@@ -26,5 +26,11 @@ public class DialogueTrigger : MonoBehaviour
             DialogueManager.instance.EnterDialogueMode(inkJson);
         }
 
+    }
+
+    IEnumerator shortPause()
+    {
+        yield return new WaitForSeconds(0.001f);
+        startDialogue();
     }
 }
