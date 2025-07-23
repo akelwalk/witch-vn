@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Ink.Runtime;
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -14,7 +16,14 @@ public class DialogueManager : MonoBehaviour
     public float typingSpeed = 0.2f;
     private bool clicked = false;
     private bool inTypeSentence = false;
-    public static DialogueManager instance {get; private set;}
+    private bool inChoice = false;
+
+    [Header("Choices UI")]
+
+    [SerializeField] private GameObject[] choices;
+    private TextMeshProUGUI[] choicesText;
+
+    public static DialogueManager instance { get; private set; }
 
     private void Awake()
     {
@@ -23,8 +32,20 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("More than one instance of DialogueManager in scene");
         }
         instance = this;
+
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
+
+        //getting the choices text boxes
+        choicesText = new TextMeshProUGUI[choices.Length];
+        int i = 0;
+        foreach (GameObject choice in choices)
+        {
+            choicesText[i] = choice.GetComponentInChildren<TextMeshProUGUI>();
+            i++;
+            choice.SetActive(false);
+        }
+
     }
 
     // private void Start()
@@ -46,7 +67,7 @@ public class DialogueManager : MonoBehaviour
             {
                 clicked = true;
             }
-            else
+            else if (!inChoice)
             {
                 clicked = false;
                 ContinueStory();
@@ -76,6 +97,9 @@ public class DialogueManager : MonoBehaviour
         {
             string line = currentStory.Continue().Trim();
             StartCoroutine(TypeSentence(line));
+
+            //display choices is in the coroutine
+            
         }
         else
         {
@@ -83,7 +107,51 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    IEnumerator TypeSentence(string line)
+    private void DisplayChoices()
+    {
+        List<Choice> currentChoices = currentStory.currentChoices;
+
+        if (currentChoices.Count > 0)
+        {
+            inChoice = true;
+        }
+
+        if (currentChoices.Count > choices.Length)
+        {
+            Debug.LogError("More choices were given than the UI can support. Number of choices given: " + currentChoices.Count);
+        }
+
+        int i = 0;
+
+        foreach (Choice choice in currentChoices)
+        {
+            choices[i].SetActive(true);
+            choicesText[i].text = choice.text;
+            i++;
+        }
+
+        StartCoroutine(SelectFirstChoice());
+    }
+
+    private IEnumerator SelectFirstChoice()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        yield return new WaitForEndOfFrame();
+        EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+    }
+
+    public void MakeChoice(int choiceIndex)
+    {
+        inChoice = false;
+        foreach (GameObject choice in choices)
+        {
+            choice.SetActive(false);
+        }
+        currentStory.ChooseChoiceIndex(choiceIndex);
+        ContinueStory(); //ADDED
+    }
+
+    private IEnumerator TypeSentence(string line)
     {
         clicked = false;
         inTypeSentence = true;
@@ -119,7 +187,7 @@ public class DialogueManager : MonoBehaviour
 
         }
         inTypeSentence = false;
-
+        DisplayChoices();
     }
 
 }
