@@ -48,11 +48,6 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    // private void Start()
-    // {
-        
-    // }
-
     private void Update()
     {
         if (!isDialoguePlaying)
@@ -63,7 +58,7 @@ public class DialogueManager : MonoBehaviour
         //So now dialogue is playing
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (inTypeSentence)
+            if (inTypeSentence && !inChoice)
             {
                 clicked = true;
             }
@@ -140,15 +135,21 @@ public class DialogueManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
     }
 
-    public void MakeChoice(int choiceIndex)
+    public void CoroutineMakeChoice(int choiceIndex)
     {
-        inChoice = false;
+        StartCoroutine(MakeChoice(choiceIndex));
+        MakeChoice(choiceIndex);
+    }
+    private IEnumerator MakeChoice(int choiceIndex)
+    {
         foreach (GameObject choice in choices)
         {
             choice.SetActive(false);
         }
         currentStory.ChooseChoiceIndex(choiceIndex);
-        ContinueStory(); //ADDED
+        ContinueStory(); 
+        yield return new WaitForSeconds(0.1f); //this is kinda bs'ed because without it, inChoice becomes false too fast and the spacebar down registers for a skip text
+        inChoice = false;
     }
 
     private IEnumerator TypeSentence(string line)
