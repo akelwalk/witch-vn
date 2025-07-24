@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Marina/Scenes/Title Screen.unity
+    guid: 5a9986dcbfdde8a469dc7151e1706ed0
+  - enabled: 1
     path: Assets/Aditi/Scenes/Level 1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
