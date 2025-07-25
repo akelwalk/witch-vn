@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     private Story currentStory;
     public bool isDialoguePlaying {get; private set;}
     public float typingSpeed = 0.2f;
+    public GameObject continueIcon;
     private bool clicked = false;
     private bool inTypeSentence = false;
     private bool inChoice = false;
@@ -35,6 +36,7 @@ public class DialogueManager : MonoBehaviour
 
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
+        continueIcon.SetActive(false);
 
         //getting the choices text boxes
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -83,6 +85,7 @@ public class DialogueManager : MonoBehaviour
     {
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
+        continueIcon.SetActive(false);
         dialogueText.text = "";
     }
 
@@ -90,6 +93,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
+            continueIcon.SetActive(false);
             string line = currentStory.Continue().Trim();
             StartCoroutine(TypeSentence(line));
 
@@ -105,9 +109,10 @@ public class DialogueManager : MonoBehaviour
     private void DisplayChoices()
     {
         List<Choice> currentChoices = currentStory.currentChoices;
-
+        continueIcon.SetActive(true);
         if (currentChoices.Count > 0)
         {
+            continueIcon.SetActive(false);
             inChoice = true;
         }
 
