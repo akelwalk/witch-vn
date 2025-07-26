@@ -4,16 +4,20 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI displayNameText;
+    [SerializeField] private GameObject characterObject; 
+    [SerializeField] private GameObject speakerPanel; 
+    private Animator characterAnimator;
     private Story currentStory;
     public bool isDialoguePlaying {get; private set;}
-    public float typingSpeed = 0.2f;
+    public float typingSpeed = 0.1f;
     public GameObject continueIcon;
     private bool clicked = false;
     private bool inTypeSentence = false;
@@ -25,6 +29,11 @@ public class DialogueManager : MonoBehaviour
     private TextMeshProUGUI[] choicesText;
 
     public static DialogueManager instance { get; private set; }
+
+    [Header("Tags")]
+    private const string SPEAKER_TAG = "speaker";
+    private const string PORTRAIT_TAG = "portrait";
+     private const string ITALICS_TAG = "italics";
 
     private void Awake()
     {
@@ -47,6 +56,7 @@ public class DialogueManager : MonoBehaviour
             i++;
             choice.SetActive(false);
         }
+        characterAnimator = characterObject.GetComponent<Animator>();
 
     }
 
@@ -58,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         //So now dialogue is playing
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             if (inTypeSentence && !inChoice)
             {
@@ -97,12 +107,57 @@ public class DialogueManager : MonoBehaviour
             string line = currentStory.Continue().Trim();
             StartCoroutine(TypeSentence(line));
 
-            //display choices is in the coroutine
+            //function call to DisplayChoices() is in the TypeSentence coroutine
+
+            HandleTags(currentStory.currentTags);
             
         }
         else
         {
             ExitDialogueMode();
+        }
+    }
+
+    private void HandleTags(List<string> currentTags)
+    {
+        foreach (string tag in currentTags)
+        {
+            //parse tage
+            string[] splitTag = tag.Split(':');
+
+            if (splitTag.Length != 2)
+            {
+                Debug.LogError("Tag couldn't be parsed: " + tag);
+            }
+            string tagKey = splitTag[0].Trim();
+            string tagValue = splitTag[1].Trim();
+
+            switch (tagKey)
+            {
+                case SPEAKER_TAG:
+                    speakerPanel.SetActive(tagValue != "");
+                    displayNameText.text = tagValue;
+                    
+                    break;
+                case PORTRAIT_TAG:
+                    characterObject.SetActive(tagValue != "");
+                    characterAnimator.Play(tagValue);
+                    break;
+                case ITALICS_TAG:
+                    if (tagValue == "true")
+                    {
+                        dialogueText.fontStyle = FontStyles.Italic;
+                    }
+                    else
+                    {
+                        dialogueText.fontStyle = FontStyles.Normal;
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Tag key is currently not handled: " + tagKey);
+                    break;
+
+            }
         }
     }
 
@@ -130,14 +185,17 @@ public class DialogueManager : MonoBehaviour
             i++;
         }
 
-        StartCoroutine(SelectFirstChoice());
+        StartCoroutine(SelectFirstChoice(currentChoices.Count));
     }
 
-    private IEnumerator SelectFirstChoice()
+    private IEnumerator SelectFirstChoice(int choiceLength)
     {
         EventSystem.current.SetSelectedGameObject(null);
         yield return new WaitForEndOfFrame();
-        EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+        if (choiceLength > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(choices[choiceLength-1].gameObject);
+        }
     }
 
     public void CoroutineMakeChoice(int choiceIndex)
@@ -177,13 +235,13 @@ public class DialogueManager : MonoBehaviour
             {
                 continue;
             }
-            else if (letter == '.' || letter == '?' || letter == '?' || letter == '!' || letter == '—')
+            else if (letter == '.' || letter == '?' || letter == ';' || letter == '!' || letter == '—')
             {
                 yield return new WaitForSeconds(typingSpeed * 2.4f);
             }
             else if (letter == ',')
             {
-                yield return new WaitForSeconds(typingSpeed * 1.5f);
+                yield return new WaitForSeconds(typingSpeed * 1.7f);
             }
             else
             {

@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    //dont need visual cue or playerin range or on trigger enter/exit functions or player tag
-    // or update method or in range or interact button
-
     [SerializeField] bool playOnStart = false;
     [SerializeField] private TextAsset inkJson;
 
@@ -16,7 +13,8 @@ public class DialogueTrigger : MonoBehaviour
         //could add a delay or transition
         if (playOnStart)
         {
-            StartCoroutine(shortPause());
+            startDialogue();
+            // StartCoroutine(shortPause());
         }
     }
     public void startDialogue()
@@ -28,9 +26,4 @@ public class DialogueTrigger : MonoBehaviour
 
     }
 
-    IEnumerator shortPause()
-    {
-        yield return new WaitForSeconds(0.001f);
-        startDialogue();
-    }
 }
