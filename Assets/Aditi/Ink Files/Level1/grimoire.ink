@@ -13,7 +13,7 @@ I see a stool over there. Maybe I could cause a distraction...#speaker:Altheia
 + [Maybe Later]
     ->END
 + [Combustion Spell!]
-    The stool lit on fire. #speaker: 
+    The stool lit on fire. #speaker: #sfx:spell
     ->knot3
     
 ===knot3===

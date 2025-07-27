@@ -10,8 +10,8 @@ It's locked. If only I could cast my unlocking spell... #speaker:Altheia
 ->END
 
 ===knot2=== //didn't do distraction
-Hey, what are you doing! Get back in there! And give me that book! #speaker:Sphinx
-    ->END //gameover
+Hey, what are you doing! Get back in there! And give me that book! #speaker:Sphinx #gameover:true
+    ->END 
 
 ===knot3=== //can escape
 I'm free! Should I make my escape? #speaker:Altheia
@@ -19,7 +19,7 @@ I'm free! Should I make my escape? #speaker:Altheia
     I want to take one last look at my prison. #speaker:Altheia
     ->END
 + [Yes]
-    Finally! I can't wait to see the look on the King's face once he knows I've gone missing. #speaker:Altheia
+    Finally! I can't wait to see the look on the King's face once he knows I've gone missing. #speaker:Altheia #transition:Level 2
 ->END
 
 ===knot4=== //deciding to unlock door or not
@@ -28,6 +28,6 @@ Use unlocking spell? #speaker:
 ->END
 + [Let's get out of here!]
 ~unlocked = true
-The door unlocks and opens. #speaker: 
+The door unlocks and opens. #speaker: #sfx:spell
 {distraction: -> knot3 | -> knot2}
 ->END

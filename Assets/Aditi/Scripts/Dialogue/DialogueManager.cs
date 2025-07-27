@@ -4,8 +4,8 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using Ink.UnityIntegration;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -20,7 +20,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private GameObject characterObject; 
-    [SerializeField] private GameObject speakerPanel; 
+    [SerializeField] private GameObject speakerPanel;
+    [SerializeField] private GameObject gameOverPanel;
     private Animator characterAnimator;
     private Story currentStory;
     public bool isDialoguePlaying {get; private set;}
@@ -41,6 +42,11 @@ public class DialogueManager : MonoBehaviour
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
     private const string ITALICS_TAG = "italics";
+    private const string SFX_TAG = "sfx";
+    private const string TRANSITION_TAG = "transition";
+    private const string GAMEOVER_TAG = "gameover";
+    private string nextScene = "";
+    private bool gameOver = false;
 
     private DialogueVariables dialogueVariables;
 
@@ -55,6 +61,7 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         continueIcon.SetActive(false);
+        // gameOverPanel.SetActive(false);
 
         //getting the choices text boxes
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -111,11 +118,19 @@ public class DialogueManager : MonoBehaviour
 
     private void ExitDialogueMode()
     {
+        dialogueVariables.StopListening(currentStory);
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         continueIcon.SetActive(false);
         dialogueText.text = "";
-        dialogueVariables.StopListening(currentStory);
+
+        if (gameOver && gameOverPanel != null) {
+            gameOverPanel.SetActive(true);
+        }
+        else if (nextScene != "")
+        {
+            SceneManager.LoadScene(nextScene);
+        }
     }
 
     private void ContinueStory()
@@ -177,6 +192,16 @@ public class DialogueManager : MonoBehaviour
                     {
                         dialogueText.fontStyle = FontStyles.Normal;
                     }
+                    break;
+                case SFX_TAG:
+                    AudioClip clip = AudioManager.instance.sfxDictionary[tagValue]; //need to make sure tag values line up with keys in the sfxList dictionary in the unity inspector
+                    AudioManager.instance.sfx.PlayOneShot(clip);
+                    break;
+                case GAMEOVER_TAG:
+                    gameOver = true;
+                    break;
+                case TRANSITION_TAG:
+                    nextScene = tagValue; //look at exit dialogue for scene transition
                     break;
                 default:
                     Debug.LogWarning("Tag key is currently not handled: " + tagKey);
@@ -254,7 +279,7 @@ public class DialogueManager : MonoBehaviour
                 break;
             }
             dialogueText.text += letter;
-            AudioManager.instance.playDialogueBeep();
+            AudioManager.instance.sfx.PlayOneShot(AudioManager.instance.sfxDictionary["dialogue"]);
 
             if (letter == ' ' || letter == '\n')
             {

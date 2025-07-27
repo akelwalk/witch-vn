@@ -8,7 +8,7 @@ INCLUDE ./globals.ink
 ===knot1===
 The Sphinx is guarding your cell. She looks bored. #speaker: #portrait:sphinx_neutral
 + [Nevermind]
-    I'd rather not bother her. #speaker:Altheia
+    I'd rather not bother her. #speaker:Altheia 
     -> END
 + [Call her over]
     -> knot2
@@ -40,11 +40,11 @@ Unchanged but e’erchanging, eternally.
     ... #speaker:Sphinx
     ->knot3
 + [A coin?]
-    Ooh! No. Better luck next time! #speaker:Sphinx
-    -> END //gameover
+    Ooh! No. Better luck next time! #speaker:Sphinx #gameover:true
+    -> END 
 + [I have no idea.]
-    Really?? You didn’t even try! #speaker:Sphinx
-    -> END //gameover
+    Really?? You didn’t even try! #speaker:Sphinx #gameover:true
+    -> END 
     
 ===knot3===
 Unfortunately, that’s correct. Here’s your book. UGH! #speaker:Sphinx
