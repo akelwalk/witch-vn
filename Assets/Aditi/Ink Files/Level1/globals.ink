@@ -1,0 +1,1 @@
+VAR answered_riddle = false

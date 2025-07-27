@@ -1,9 +1,14 @@
--> knot1
+INCLUDE ./globals.ink
+
+-> knot0
+
+===knot0====
+{answered_riddle: -> knot4| -> knot1}
 
 ===knot1===
 The Sphinx is guarding your cell. She looks bored. #speaker: #portrait:sphinx_neutral
 + [Nevermind]
-    <i>I'd rather not bother her.</i> #speaker:Altheia
+    I'd rather not bother her. #speaker:Altheia
     -> END
 + [Call her over]
     -> knot2
@@ -31,19 +36,26 @@ Jewel on black velvet, pearl in the sea,
 Unchanged but e’erchanging, eternally.
 ... #speaker:Altheia #italics:false
 + [The moon?]
+    ~answered_riddle = true //setting the flag for answering riddle correctly
     ... #speaker:Sphinx
     ->knot3
 + [A coin?]
     Ooh! No. Better luck next time! #speaker:Sphinx
-    -> END //bad ending
+    -> END //gameover
 + [I have no idea.]
     Really?? You didn’t even try! #speaker:Sphinx
-    -> END //bad ending? have some sort of text for that
+    -> END //gameover have some sort of text for that
     
 ===knot3===
 Unfortunately, that’s correct. Here’s your book. UGH! #speaker:Sphinx
 You have received your grimoire! #speaker: 
+I should try escaping now that I have my powers back. #speaker:Altheia
+->END
 
+===knot4===
+She is still watching you. #speaker: 
+We can still play riddles if you want! #speaker:Sphinx
+No thanks, I’ve got my book now. #speaker:Altheia
 ->END
 
 

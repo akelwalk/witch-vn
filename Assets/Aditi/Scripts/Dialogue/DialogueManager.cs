@@ -5,9 +5,16 @@ using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Ink.UnityIntegration;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Parameters")]
+    public float typingSpeed = 0.1f;
+
+    [Header("Globals Ink File")]
+    [SerializeField] private InkFile globalsInkFile;
+
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -17,7 +24,7 @@ public class DialogueManager : MonoBehaviour
     private Animator characterAnimator;
     private Story currentStory;
     public bool isDialoguePlaying {get; private set;}
-    public float typingSpeed = 0.1f;
+    
     public GameObject continueIcon;
     private bool clicked = false;
     private bool inTypeSentence = false;
@@ -30,10 +37,12 @@ public class DialogueManager : MonoBehaviour
 
     public static DialogueManager instance { get; private set; }
 
-    [Header("Tags")]
+    // [Header("Tags")]
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
-     private const string ITALICS_TAG = "italics";
+    private const string ITALICS_TAG = "italics";
+
+    private DialogueVariables dialogueVariables;
 
     private void Awake()
     {
@@ -57,6 +66,8 @@ public class DialogueManager : MonoBehaviour
             choice.SetActive(false);
         }
         characterAnimator = characterObject.GetComponent<Animator>();
+
+        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
 
     }
 
@@ -88,6 +99,13 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = true;
         dialoguePanel.SetActive(true);
 
+        dialogueVariables.StartListening(currentStory);
+
+        //reset portrait and speaker
+        displayNameText.text = "???";
+        dialogueText.text = "???";
+        // characterAnimator.Play("Default"); //i didn't put a default bruh
+
         ContinueStory();
     }
 
@@ -97,6 +115,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         continueIcon.SetActive(false);
         dialogueText.text = "";
+        dialogueVariables.StopListening(currentStory);
     }
 
     private void ContinueStory()
@@ -105,11 +124,17 @@ public class DialogueManager : MonoBehaviour
         {
             continueIcon.SetActive(false);
             string line = currentStory.Continue().Trim();
-            StartCoroutine(TypeSentence(line));
+            if (line == "") //I get this weird empty line if I dont have anything to say before an end or a done
+            {
+                ExitDialogueMode();
+            }
+            else {
+                StartCoroutine(TypeSentence(line));
 
-            //function call to DisplayChoices() is in the TypeSentence coroutine
+                //function call to DisplayChoices() is in the TypeSentence coroutine
 
-            HandleTags(currentStory.currentTags);
+                HandleTags(currentStory.currentTags);
+            }
             
         }
         else

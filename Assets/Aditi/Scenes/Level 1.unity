@@ -1927,7 +1927,7 @@ GameObject:
   - component: {fileID: 1631167689}
   - component: {fileID: 1631167688}
   m_Layer: 0
-  m_Name: Sphinx
+  m_Name: Speaker
   m_TagString: clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2126,12 +2126,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f0654206d855f45ac46a1486cef569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typingSpeed: 0.08
+  globalsInkFile:
+    inkAsset: {fileID: 102900000, guid: 1a2960bb14a11104682373090f269b56, type: 3}
+    jsonAssetDirectory: {fileID: 0}
+    jsonAsset: {fileID: 0}
+    unhandledCompileErrors: []
+    recursiveIncludeErrorPaths: []
+    errors: []
+    warnings: []
+    todos: []
+    masterInkAssets: []
+    localIncludePaths: []
+    includes: []
   dialoguePanel: {fileID: 329351724}
   dialogueText: {fileID: 829873108}
   displayNameText: {fileID: 1111446496}
   characterObject: {fileID: 1631167683}
   speakerPanel: {fileID: 835771177}
-  typingSpeed: 0.08
   continueIcon: {fileID: 1855944069}
   choices:
   - {fileID: 1567737001}
