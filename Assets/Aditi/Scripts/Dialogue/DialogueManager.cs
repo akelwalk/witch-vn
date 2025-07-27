@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
-using Ink.UnityIntegration;
+// using Ink.UnityIntegration;
 using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     public float typingSpeed = 0.1f;
 
     [Header("Globals Ink File")]
-    [SerializeField] private InkFile globalsInkFile;
+    [SerializeField] private string globalsInkFilePath;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -74,7 +74,7 @@ public class DialogueManager : MonoBehaviour
         }
         characterAnimator = characterObject.GetComponent<Animator>();
 
-        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
+        dialogueVariables = new DialogueVariables(globalsInkFilePath);
 
     }
 
@@ -111,7 +111,7 @@ public class DialogueManager : MonoBehaviour
         //reset portrait and speaker
         displayNameText.text = "???";
         dialogueText.text = "???";
-        // characterAnimator.Play("Default"); //i didn't put a default bruh
+        characterAnimator.Play("default");
 
         ContinueStory();
     }
@@ -124,7 +124,8 @@ public class DialogueManager : MonoBehaviour
         continueIcon.SetActive(false);
         dialogueText.text = "";
 
-        if (gameOver && gameOverPanel != null) {
+        if (gameOver && gameOverPanel != null)
+        {
             gameOverPanel.SetActive(true);
         }
         else if (nextScene != "")

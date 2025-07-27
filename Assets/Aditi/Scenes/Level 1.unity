@@ -2937,18 +2937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typingSpeed: 0.08
-  globalsInkFile:
-    inkAsset: {fileID: 102900000, guid: 1a2960bb14a11104682373090f269b56, type: 3}
-    jsonAssetDirectory: {fileID: 0}
-    jsonAsset: {fileID: 0}
-    unhandledCompileErrors: []
-    recursiveIncludeErrorPaths: []
-    errors: []
-    warnings: []
-    todos: []
-    masterInkAssets: []
-    localIncludePaths: []
-    includes: []
+  globalsInkFilePath: ./Assets/Aditi/Ink/Level1/globals.ink
   dialoguePanel: {fileID: 329351724}
   dialogueText: {fileID: 829873108}
   displayNameText: {fileID: 1111446496}
