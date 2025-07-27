@@ -44,11 +44,11 @@ Unchanged but e’erchanging, eternally.
     -> END //gameover
 + [I have no idea.]
     Really?? You didn’t even try! #speaker:Sphinx
-    -> END //gameover have some sort of text for that
+    -> END //gameover
     
 ===knot3===
 Unfortunately, that’s correct. Here’s your book. UGH! #speaker:Sphinx
-You have received your grimoire! #speaker: 
+You have received your Grimoire! #speaker: 
 I should try escaping now that I have my powers back. #speaker:Altheia
 ->END
 
