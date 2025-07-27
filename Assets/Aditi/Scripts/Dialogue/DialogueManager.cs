@@ -45,6 +45,9 @@ public class DialogueManager : MonoBehaviour
     private const string SFX_TAG = "sfx";
     private const string TRANSITION_TAG = "transition";
     private const string GAMEOVER_TAG = "gameover";
+    private const string CLEAR_PORTRAIT_TAG = "clearEndPortrait";
+
+    private string clearEndPortrait = ""; //could make this true if you want to ensure there's nothing that shows up rather than the default animation. however, if you make it true, at a certain point you have to make it empty again in the ink file so that the default will show up again
     private string nextScene = "";
     private bool gameOver = false;
 
@@ -61,7 +64,7 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         continueIcon.SetActive(false);
-        // gameOverPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
 
         //getting the choices text boxes
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -124,6 +127,11 @@ public class DialogueManager : MonoBehaviour
         continueIcon.SetActive(false);
         dialogueText.text = "";
 
+        //setting the character to default value after exiting dialogue
+        characterObject.SetActive(clearEndPortrait == "");
+        characterAnimator.Play("default");
+        
+        //handling game over and scene transitions
         if (gameOver && gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
@@ -203,6 +211,9 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case TRANSITION_TAG:
                     nextScene = tagValue; //look at exit dialogue for scene transition
+                    break;
+                case CLEAR_PORTRAIT_TAG:
+                    clearEndPortrait = tagValue;
                     break;
                 default:
                     Debug.LogWarning("Tag key is currently not handled: " + tagKey);

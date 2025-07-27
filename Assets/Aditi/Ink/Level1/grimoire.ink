@@ -5,11 +5,11 @@ INCLUDE ./globals.ink
 {answered_riddle: -> knot2| -> knot1}
 
 ===knot1===
-That's my grimoire! They took it when the King imprisoned me.#speaker:Altheia
+That's my grimoire! They took it when the King imprisoned me. #speaker:Altheia #portrait:altheia_neutral
 ->END
 
 ===knot2===
-I see a stool over there. Maybe I could cause a distraction...#speaker:Altheia
+I see a stool over there. Maybe I could cause a distraction...#speaker:Altheia #portrait:altheia_neutral
 + [Maybe Later]
     ->END
 + [Combustion Spell!]
@@ -19,5 +19,5 @@ I see a stool over there. Maybe I could cause a distraction...#speaker:Altheia
 ===knot3===
 ~distraction = true
 Oh my gods! What is happening??? #speaker:Sphinx
-Sphinx went to examine the stool and put out the fire. #speaker:  #portrait: 
+Sphinx went to examine the stool and put out the fire. #speaker:  #portrait: #clearEndPortrait:true
 ->END
