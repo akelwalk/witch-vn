@@ -55,12 +55,6 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogWarning("More than one instance of DialogueManager in scene");
-        }
-        instance = this;
-
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         continueIcon.SetActive(false);
@@ -79,6 +73,11 @@ public class DialogueManager : MonoBehaviour
 
         dialogueVariables = new DialogueVariables(globalsInkFilePath);
 
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of DialogueManager in scene");
+        }
+        instance = this;
     }
 
     private void Update()
@@ -142,7 +141,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void ContinueStory()
+    public void ContinueStory()
     {
         if (currentStory.canContinue)
         {
@@ -316,4 +315,13 @@ public class DialogueManager : MonoBehaviour
         DisplayChoices();
     }
 
+    public Story GetStory()
+    {
+        return currentStory;
+    }
+
+    public void SetStory(Story story)
+    {
+        currentStory = story;
+    }
 }

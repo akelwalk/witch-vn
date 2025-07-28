@@ -45,6 +45,7 @@ public class DialogueVariables
         {
             variables.Remove(name);
             variables.Add(name, value);
+            Debug.Log($"variable {name} changed to {value}");
         }
         else
         {
