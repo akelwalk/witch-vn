@@ -4,8 +4,8 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using Ink.UnityIntegration;
+// using Ink.UnityIntegration;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -13,14 +13,15 @@ public class DialogueManager : MonoBehaviour
     public float typingSpeed = 0.1f;
 
     [Header("Globals Ink File")]
-    [SerializeField] private InkFile globalsInkFile;
+    [SerializeField] private string globalsInkFilePath;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private GameObject characterObject; 
-    [SerializeField] private GameObject speakerPanel; 
+    [SerializeField] private GameObject speakerPanel;
+    [SerializeField] private GameObject gameOverPanel;
     private Animator characterAnimator;
     private Story currentStory;
     public bool isDialoguePlaying {get; private set;}
@@ -41,6 +42,14 @@ public class DialogueManager : MonoBehaviour
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
     private const string ITALICS_TAG = "italics";
+    private const string SFX_TAG = "sfx";
+    private const string TRANSITION_TAG = "transition";
+    private const string GAMEOVER_TAG = "gameover";
+    private const string CLEAR_PORTRAIT_TAG = "clearEndPortrait";
+
+    private string clearEndPortrait = ""; //could make this true if you want to ensure there's nothing that shows up rather than the default animation. however, if you make it true, at a certain point you have to make it empty again in the ink file so that the default will show up again
+    private string nextScene = "";
+    private bool gameOver = false;
 
     private DialogueVariables dialogueVariables;
 
@@ -55,6 +64,7 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         continueIcon.SetActive(false);
+        gameOverPanel.SetActive(false);
 
         //getting the choices text boxes
         choicesText = new TextMeshProUGUI[choices.Length];
@@ -67,7 +77,7 @@ public class DialogueManager : MonoBehaviour
         }
         characterAnimator = characterObject.GetComponent<Animator>();
 
-        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
+        dialogueVariables = new DialogueVariables(globalsInkFilePath);
 
     }
 
@@ -104,18 +114,32 @@ public class DialogueManager : MonoBehaviour
         //reset portrait and speaker
         displayNameText.text = "???";
         dialogueText.text = "???";
-        // characterAnimator.Play("Default"); //i didn't put a default bruh
+        characterAnimator.Play("default");
 
         ContinueStory();
     }
 
     private void ExitDialogueMode()
     {
+        dialogueVariables.StopListening(currentStory);
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         continueIcon.SetActive(false);
         dialogueText.text = "";
-        dialogueVariables.StopListening(currentStory);
+
+        //setting the character to default value after exiting dialogue
+        characterObject.SetActive(clearEndPortrait == "");
+        characterAnimator.Play("default");
+        
+        //handling game over and scene transitions
+        if (gameOver && gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+        else if (nextScene != "")
+        {
+            SceneManager.LoadScene(nextScene);
+        }
     }
 
     private void ContinueStory()
@@ -177,6 +201,19 @@ public class DialogueManager : MonoBehaviour
                     {
                         dialogueText.fontStyle = FontStyles.Normal;
                     }
+                    break;
+                case SFX_TAG:
+                    AudioClip clip = AudioManager.instance.sfxDictionary[tagValue]; //need to make sure tag values line up with keys in the sfxList dictionary in the unity inspector
+                    AudioManager.instance.sfx.PlayOneShot(clip);
+                    break;
+                case GAMEOVER_TAG:
+                    gameOver = true;
+                    break;
+                case TRANSITION_TAG:
+                    nextScene = tagValue; //look at exit dialogue for scene transition
+                    break;
+                case CLEAR_PORTRAIT_TAG:
+                    clearEndPortrait = tagValue;
                     break;
                 default:
                     Debug.LogWarning("Tag key is currently not handled: " + tagKey);
@@ -254,7 +291,7 @@ public class DialogueManager : MonoBehaviour
                 break;
             }
             dialogueText.text += letter;
-            AudioManager.instance.playDialogueBeep();
+            AudioManager.instance.sfx.PlayOneShot(AudioManager.instance.sfxDictionary["dialogue"]);
 
             if (letter == ' ' || letter == '\n')
             {
