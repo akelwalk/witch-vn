@@ -786,8 +786,9 @@ GameObject:
   m_Component:
   - component: {fileID: 340515316}
   - component: {fileID: 340515317}
+  - component: {fileID: 340515318}
   m_Layer: 0
-  m_Name: Grimoire
+  m_Name: GrimoireImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -860,6 +861,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &340515318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340515315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e805cdc38ecfea94eb180fb9ec066e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &497607941
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,8 +2728,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3211205, y: -0.46992925}
-  m_Size: {x: 1.9747748, y: 2.2010326}
+  m_Offset: {x: -0.3211205, y: -0.7630265}
+  m_Size: {x: 1.9747748, y: 2.7872272}
   m_Direction: 0
 --- !u!1 &1598484966
 GameObject:

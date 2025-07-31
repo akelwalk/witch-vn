@@ -11,11 +11,11 @@ No, methinks you is an escaped prisoner from the dungeons! Come to think of it, 
 [Busted...] Alright, you've got me. #speaker:Altheia #portrait:altheia_neutral
 Come here, you little-- #speaker:Troll #portrait:troll_neutral
 What should I do? #speaker:Altheia #portrait:altheia_neutral
-+ [Persuade]
-    ->knot2
 + [Give Up]
     Troll swings his club at you, and you feel your consciousness slowly fade away. #speaker:Troll #gameover:true
     -> END
++ [Persuade]
+    ->knot2
 
 ===knot2==
 Let me pass, and I won’t have to hurt you. #speaker:Altheia #portrait:altheia_neutral

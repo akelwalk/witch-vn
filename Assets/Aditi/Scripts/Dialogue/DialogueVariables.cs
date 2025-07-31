@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
+using Unity.VisualScripting;
 
 public class DialogueVariables
 {
 
     //dictionary of variables - variableName: value
-    private Dictionary<string, Ink.Runtime.Object> variables = new Dictionary<string, Ink.Runtime.Object>();
+    public Dictionary<string, Ink.Runtime.Object> variables = new Dictionary<string, Ink.Runtime.Object>();
 
     //public constructor
     public DialogueVariables(TextAsset globalsJson)

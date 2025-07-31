@@ -210,7 +210,6 @@ public class DialogueManager : MonoBehaviour
                     AudioManager.instance.sfx.PlayOneShot(clip);
                     break;
                 case GAMEOVER_TAG:
-                    print("in gameover tag");
                     gameOver = true;
                     break;
                 case TRANSITION_TAG:
@@ -284,6 +283,16 @@ public class DialogueManager : MonoBehaviour
         inChoice = false;
     }
 
+    public Ink.Runtime.Object GetVariableState(string variableName)
+    {
+        dialogueVariables.variables.TryGetValue(variableName, out Ink.Runtime.Object variableValue);
+        if (variableValue != null)
+        {
+            Debug.LogWarning("Ink variable found to be null: " + variableName);
+        }
+        return variableValue;
+    }
+
     private IEnumerator TypeSentence(string line)
     {
         clicked = false;
@@ -304,7 +313,7 @@ public class DialogueManager : MonoBehaviour
             {
                 continue;
             }
-            else if (letter == '.' || letter == '?' || letter == ';' || letter == '!' || letter == '—')
+            else if (letter == '.' || letter == '?' || letter == ';' || letter == '!' || letter == '—' || letter == '-')
             {
                 yield return new WaitForSeconds(typingSpeed * 2.4f);
             }
@@ -316,8 +325,6 @@ public class DialogueManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(typingSpeed);
             }
-
-
         }
         inTypeSentence = false;
         DisplayChoices();
