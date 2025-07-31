@@ -10,7 +10,7 @@ It's locked. If only I could cast my unlocking spell... #speaker:Altheia #portra
 ->END
 
 ===knot2=== //didn't do distraction
-Hey, what are you doing! Get back in there! And give me that book! #speaker:Sphinx portrait:sphinx_neutral #gameover:true
+Hey, what are you doing! Get back in there! And give me that book! #speaker:Sphinx #portrait:sphinx_neutral #gameover:true
     ->END 
 
 ===knot3=== //can escape

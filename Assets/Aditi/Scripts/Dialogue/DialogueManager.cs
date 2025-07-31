@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
-// using Ink.UnityIntegration;
 using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
@@ -13,7 +12,7 @@ public class DialogueManager : MonoBehaviour
     public float typingSpeed = 0.1f;
 
     [Header("Globals Ink File")]
-    [SerializeField] private string globalsInkFilePath;
+    [SerializeField] private TextAsset loadGlobalsJson;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -77,7 +76,7 @@ public class DialogueManager : MonoBehaviour
         }
         characterAnimator = characterObject.GetComponent<Animator>();
 
-        dialogueVariables = new DialogueVariables(globalsInkFilePath);
+        dialogueVariables = new DialogueVariables(loadGlobalsJson);
 
     }
 
@@ -207,6 +206,7 @@ public class DialogueManager : MonoBehaviour
                     AudioManager.instance.sfx.PlayOneShot(clip);
                     break;
                 case GAMEOVER_TAG:
+                    print("in gameover tag");
                     gameOver = true;
                     break;
                 case TRANSITION_TAG:
