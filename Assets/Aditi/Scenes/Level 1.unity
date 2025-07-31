@@ -3204,6 +3204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1725044731}
   - component: {fileID: 1725044732}
+  - component: {fileID: 1725044733}
   m_Layer: 0
   m_Name: Bars
   m_TagString: Untagged
@@ -3278,6 +3279,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1725044733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725044730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d456d371afad9744782c9c7875f1d329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openBars: {fileID: 21300000, guid: bd5f0f8b8dc165b45846db496711e527, type: 3}
 --- !u!1 &1789754213
 GameObject:
   m_ObjectHideFlags: 0
