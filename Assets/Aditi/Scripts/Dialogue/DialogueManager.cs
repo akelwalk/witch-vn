@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject speakerPanel;
     [SerializeField] private GameObject gameOverPanel;
     private Animator characterAnimator;
+    private SpriteRenderer characterSpriteRenderer;
     private Story currentStory;
     public bool isDialoguePlaying {get; private set;}
     
@@ -45,6 +46,7 @@ public class DialogueManager : MonoBehaviour
     private const string TRANSITION_TAG = "transition";
     private const string GAMEOVER_TAG = "gameover";
     private const string CLEAR_PORTRAIT_TAG = "clearEndPortrait";
+    private const string PORTRAIT_SORTING_ORDER_TAG = "portraitSortingOrder";
 
     private string clearEndPortrait = ""; //could make this true if you want to ensure there's nothing that shows up rather than the default animation. however, if you make it true, at a certain point you have to make it empty again in the ink file so that the default will show up again
     private string nextScene = "";
@@ -75,7 +77,7 @@ public class DialogueManager : MonoBehaviour
             choice.SetActive(false);
         }
         characterAnimator = characterObject.GetComponent<Animator>();
-
+        characterSpriteRenderer = characterObject.GetComponent<SpriteRenderer>();
         dialogueVariables = new DialogueVariables(loadGlobalsJson);
 
     }
@@ -114,6 +116,7 @@ public class DialogueManager : MonoBehaviour
         displayNameText.text = "???";
         dialogueText.text = "???";
         characterAnimator.Play("default");
+        characterSpriteRenderer.sortingOrder = -3;
 
         ContinueStory();
     }
@@ -129,7 +132,8 @@ public class DialogueManager : MonoBehaviour
         //setting the character to default value after exiting dialogue
         characterObject.SetActive(clearEndPortrait == "");
         characterAnimator.Play("default");
-        
+        characterSpriteRenderer.sortingOrder = -3;
+
         //handling game over and scene transitions
         if (gameOver && gameOverPanel != null)
         {
@@ -214,6 +218,9 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case CLEAR_PORTRAIT_TAG:
                     clearEndPortrait = tagValue;
+                    break;
+                case PORTRAIT_SORTING_ORDER_TAG:
+                    characterSpriteRenderer.sortingOrder = int.Parse(tagValue);
                     break;
                 default:
                     Debug.LogWarning("Tag key is currently not handled: " + tagKey);

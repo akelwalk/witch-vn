@@ -6,20 +6,20 @@ INCLUDE ./globals.ink
 {answered_riddle: {unlocked: -> knot3 | ->knot4} | -> knot1 }
 
 ===knot1=== //havent gotten spellbook
-It's locked. If only I could cast my unlocking spell... #speaker:Altheia #portrait:altheia_neutral
+It's locked. If only I could cast my unlocking spell... #speaker:Altheia #portrait:altheia_neutral #portraitSortingOrder:-1
 ->END
 
 ===knot2=== //didn't do distraction
-Hey, what are you doing! Get back in there! And give me that book! #speaker:Sphinx #portrait:sphinx_neutral #gameover:true
+Hey, what are you doing! Get back in there! And give me that book! #speaker:Sphinx #portrait:sphinx_neutral #gameover:true #portraitSortingOrder:-3
     ->END 
 
 ===knot3=== //can escape
-I'm free! Should I make my escape? #speaker:Altheia #portrait:altheia_neutral
+I'm free! Should I make my escape? #speaker:Altheia #portrait:altheia_neutral #portraitSortingOrder:-1
 + [No]
-    I want to take one last look at my prison. #speaker:Altheia #portrait:altheia_neutral #clearEndPortrait:true
+    I want to take one last look at my prison. #speaker:Altheia #portrait:altheia_neutral #clearEndPortrait:true #portraitSortingOrder:-1
     ->END
 + [Yes]
-    Finally! I can't wait to see the look on the King's face once he knows I've gone missing. #speaker:Altheia #portrait:altheia_neutral #transition:Level 2
+    Finally! I can't wait to see the look on the King's face once he knows I've gone missing. #speaker:Altheia #portrait:altheia_neutral #portraitSortingOrder:-1 #transition:Level 2
 ->END
 
 ===knot4=== //deciding to unlock door or not
