@@ -448,7 +448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Alethia's Revenge
+  m_text: Altheia's Revenge
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 332cf24592706504c817fa39422f44e2, type: 2}
   m_sharedMaterial: {fileID: -5791790999106394451, guid: 332cf24592706504c817fa39422f44e2, type: 2}
