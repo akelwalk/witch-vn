@@ -32,7 +32,7 @@ Hey! I’m powerful!! #speaker:Altheia #portrait:altheia_neutral
     ->knot3
 
 ===knot3===
-[What should I cast?]
+What should I cast?
 + [Light Spell]
     You cast light spell, and all the lights in the room suddenly go out! You can tell where the Troll is by his heavy footsteps, allowing you to sneak past him and enter the throne room. #speaker: #sfx:spell
     CURSE TINY WITCH-BUUUUG!!! #speaker:Troll #portrait:troll_neutral #transition:Level 3

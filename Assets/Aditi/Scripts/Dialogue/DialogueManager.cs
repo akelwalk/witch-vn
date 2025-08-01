@@ -50,7 +50,7 @@ public class DialogueManager : MonoBehaviour
 
     private string clearEndPortrait = ""; //could make this true if you want to ensure there's nothing that shows up rather than the default animation. however, if you make it true, at a certain point you have to make it empty again in the ink file so that the default will show up again
     private string nextScene = "";
-    private bool gameOver = false;
+    public bool gameOver = false;
 
     private DialogueVariables dialogueVariables;
 
