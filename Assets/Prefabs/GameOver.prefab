@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Game Over
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 557638fd4c3f59447a20f1dc63b4fa39, type: 2}
-  m_sharedMaterial: {fileID: 1784507507913099669, guid: 557638fd4c3f59447a20f1dc63b4fa39, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 332cf24592706504c817fa39422f44e2, type: 2}
+  m_sharedMaterial: {fileID: -5791790999106394451, guid: 332cf24592706504c817fa39422f44e2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 74.4
-  m_fontSizeBase: 74.4
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

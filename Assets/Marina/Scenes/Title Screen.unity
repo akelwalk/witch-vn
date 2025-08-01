@@ -426,7 +426,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 408.4792, y: 95.9518}
+  m_SizeDelta: {x: 785.7164, y: 95.9518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &574071988
 MonoBehaviour:
@@ -450,8 +450,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Alethia's Revenge
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 557638fd4c3f59447a20f1dc63b4fa39, type: 2}
-  m_sharedMaterial: {fileID: 1784507507913099669, guid: 557638fd4c3f59447a20f1dc63b4fa39, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 332cf24592706504c817fa39422f44e2, type: 2}
+  m_sharedMaterial: {fileID: -5791790999106394451, guid: 332cf24592706504c817fa39422f44e2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -475,8 +475,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.18
-  m_fontSizeBase: 68.18
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
