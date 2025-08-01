@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private GameObject characterObject; 
     [SerializeField] private GameObject speakerPanel;
-    [SerializeField] private GameObject gameOverPanel;
+    
     private Animator characterAnimator;
     private SpriteRenderer characterSpriteRenderer;
     private Story currentStory;
@@ -45,14 +45,20 @@ public class DialogueManager : MonoBehaviour
     private const string SFX_TAG = "sfx";
     private const string TRANSITION_TAG = "transition";
     private const string GAMEOVER_TAG = "gameover";
+    private const string GAME_COMPLETE_TAG = "gameComplete";
     private const string CLEAR_PORTRAIT_TAG = "clearEndPortrait";
     private const string PORTRAIT_SORTING_ORDER_TAG = "portraitSortingOrder";
 
     private string clearEndPortrait = ""; //could make this true if you want to ensure there's nothing that shows up rather than the default animation. however, if you make it true, at a certain point you have to make it empty again in the ink file so that the default will show up again
     private string nextScene = "";
     public bool gameOver = false;
+    public bool gameFinished = false; //when you reach an ending, display thanks for playing panel
 
     private DialogueVariables dialogueVariables;
+
+    [Header("Screens")]
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject thanksForPlayingPanel;
 
     private void Awake()
     {
@@ -135,9 +141,13 @@ public class DialogueManager : MonoBehaviour
         characterSpriteRenderer.sortingOrder = -3;
 
         //handling game over and scene transitions
-        if (gameOver && gameOverPanel != null)
+        if (gameOver)
         {
             gameOverPanel.SetActive(true);
+        }
+        else if (gameFinished)
+        {
+            thanksForPlayingPanel.SetActive(true);
         }
         else if (nextScene != "")
         {
@@ -220,6 +230,9 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case PORTRAIT_SORTING_ORDER_TAG:
                     characterSpriteRenderer.sortingOrder = int.Parse(tagValue);
+                    break;
+                case GAME_COMPLETE_TAG:
+                    gameFinished = true;
                     break;
                 default:
                     Debug.LogWarning("Tag key is currently not handled: " + tagKey);

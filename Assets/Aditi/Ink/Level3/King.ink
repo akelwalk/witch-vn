@@ -44,12 +44,12 @@ Altheia, let’s defeat him together!
     I would love to. #speaker:Sphinx #portrait:sphinx_neutral
     You both decide to run the kingdom equally and fairly. Under your rule, magic research thrives and the kingdom supports powerful mages instead of shunning them to the dark corners of society. #speaker: #portrait:altheia_neutral
     Sphinx, having a fondness for riddles, creates a civil service examination that awards ordinary citizens government positions based on their intellect and character. #speaker: #portrait:sphinx_neutral
-    This new system of government protects people and creatures of all kinds, winning the favor and respect of the public. #speaker: #portrait: //ending
+    This new system of government protects people and creatures of all kinds, winning the favor and respect of the public. #speaker: #portrait: #gameComplete:true
     ->END
 + [Escape!]
     He's not worth it. Let's escape together! #speaker:Altheia #portrait:altheia_neutral
     Well, I can't beat him without you, so... let's get out of here! #speaker:Sphinx #portrait:sphinx_neutral
-    You both escape from the castle and live a long and happy life together far from the King's empire. #speaker: #portrait: //ending 
+    You both escape from the castle and live a long and happy life together far from the King's empire. #speaker: #portrait: #gameComplete:true
     ->END
     
 ===knot4===
@@ -91,7 +91,7 @@ It will be bad if he finishes casting that spell. I need to think of something q
         // The feeling of taking a life, no matter how despicable, weighs on your conciousness.
         This place gives me bad memories, and I do not want to deal with the aftermath of the King's death. 
         Maybe if I had a friend's support, I would be willing to establish a system of government. I fear falling into the late King's footsteps if I take over the throne alone.
-        Altheia escapes the castle and lives out her life peacefully, practicing spells and experimenting with potions in her cottage. #speaker: #portrait: //ending
+        Altheia escapes the castle and lives out her life peacefully, practicing spells and experimenting with potions in her cottage. #speaker: #portrait: #gameComplete:true
     ->END
 + [Cast Spell]
     ->spell2
