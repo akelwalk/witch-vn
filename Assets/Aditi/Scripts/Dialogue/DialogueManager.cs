@@ -96,7 +96,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         //So now dialogue is playing
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        // || Input.GetMouseButtonDown(0) i removed clicking for going through the dialogue
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (inTypeSentence && !inChoice)
             {
@@ -308,8 +309,10 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator TypeSentence(string line)
     {
+        
         clicked = false;
         inTypeSentence = true;
+        // dialogueText.text = line;
         dialogueText.text = "";
         foreach (char letter in line.ToCharArray())
         {

@@ -36,7 +36,6 @@ Jewel on black velvet, pearl in the sea,
 Unchanged but e’erchanging, eternally.
 ... #speaker:Altheia #portrait:altheia_neutral #italics:false #portraitSortingOrder:-1
 + [The moon?]
-    ~answered_riddle = true //setting the flag for answering riddle correctly
     ... #speaker:Sphinx #portrait:sphinx_neutral #portraitSortingOrder:-3
     ->knot3
 + [A coin?]
@@ -48,6 +47,7 @@ Unchanged but e’erchanging, eternally.
     
 ===knot3===
 Unfortunately, that’s correct. Here’s your book. UGH! #speaker:Sphinx #portrait:sphinx_neutral #portraitSortingOrder:-3
+~answered_riddle = true //setting the flag for answering riddle correctly
 You have received your Grimoire! #speaker: 
 I should try escaping now that I have my powers back. #speaker:Altheia #portrait:altheia_neutral #portraitSortingOrder:-1
 ->END
