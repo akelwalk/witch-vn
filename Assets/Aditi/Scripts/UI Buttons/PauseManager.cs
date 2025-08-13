@@ -24,7 +24,7 @@ public class PauseManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!DialogueManager.instance.gameOver && !DialogueManager.instance.gameFinished && Input.GetKeyDown(KeyCode.Escape))
         {
             if (!paused)
             {
@@ -74,7 +74,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1;
         yield return new WaitForSeconds(0.1f); //weird stuff happens without this
         paused = false;
-        if (DialogueManager.instance != null)
+        if (DialogueManager.instance != null && DialogueManager.instance.currentStory != null && !DialogueManager.instance.inTypeSentence)
         {
             DialogueManager.instance.DisplayChoices();
         }

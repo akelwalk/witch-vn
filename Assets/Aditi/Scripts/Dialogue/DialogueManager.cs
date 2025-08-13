@@ -23,12 +23,12 @@ public class DialogueManager : MonoBehaviour
     
     private Animator characterAnimator;
     private SpriteRenderer characterSpriteRenderer;
-    private Story currentStory;
+    public Story currentStory = null;
     public bool isDialoguePlaying {get; private set;}
     
     public GameObject continueIcon;
     private bool clicked = false;
-    private bool inTypeSentence = false;
+    [HideInInspector] public bool inTypeSentence = false;
     private bool inChoice = false;
 
     [Header("Choices UI")]
@@ -50,7 +50,7 @@ public class DialogueManager : MonoBehaviour
     private const string PORTRAIT_SORTING_ORDER_TAG = "portraitSortingOrder";
 
     private string clearEndPortrait = ""; //could make this true if you want to ensure there's nothing that shows up rather than the default animation. however, if you make it true, at a certain point you have to make it empty again in the ink file so that the default will show up again
-    private string nextScene = "";
+    private string nextSceneIndex = "";
     public bool gameOver = false;
     public bool gameFinished = false; //when you reach an ending, display thanks for playing panel
 
@@ -150,8 +150,9 @@ public class DialogueManager : MonoBehaviour
         {
             thanksForPlayingPanel.SetActive(true);
         }
-        else if (nextScene != "")
+        else if (nextSceneIndex != "")
         {
+            LevelManager.Instance.level = int.Parse(nextSceneIndex);
             SceneManager.LoadScene("Transition");
         }
     }
@@ -224,7 +225,7 @@ public class DialogueManager : MonoBehaviour
                     gameOver = true;
                     break;
                 case TRANSITION_TAG:
-                    nextScene = tagValue; //look at exit dialogue for scene transition
+                    nextSceneIndex = tagValue; //look at exit dialogue for scene transition
                     break;
                 case CLEAR_PORTRAIT_TAG:
                     clearEndPortrait = tagValue;

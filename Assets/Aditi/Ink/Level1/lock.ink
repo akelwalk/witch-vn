@@ -19,7 +19,7 @@ I'm free! Should I make my escape? #speaker:Altheia #portrait:altheia_neutral #p
     I want to take one last look at my prison. #speaker:Altheia #portrait:altheia_neutral #clearEndPortrait:true #portraitSortingOrder:-1
     ->END
 + [Yes]
-    Finally! I can't wait to see the look on the King's face once he knows I've gone missing. #speaker:Altheia #portrait:altheia_neutral #portraitSortingOrder:-1 #transition:Level 2
+    Finally! I can't wait to see the look on the King's face once he knows I've gone missing. #speaker:Altheia #portrait:altheia_neutral #portraitSortingOrder:-1 #transition:1
 ->END
 
 ===knot4=== //deciding to unlock door or not

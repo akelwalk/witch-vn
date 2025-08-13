@@ -18,7 +18,7 @@ I see a stool over there. Maybe I could cause a distraction...#speaker:Altheia #
     
 ===knot3===
 ~distraction = true
-Oh my gods! What is happening??? #speaker:Sphinx #portraitSortingOrder:-3
+Oh my gods! What is happening??? #speaker:Sphinx #portrait:sphinx_neutral #portraitSortingOrder:-3
 Sphinx went to examine the stool and put out the fire. #speaker:  #portrait: #clearEndPortrait:true
 ->END
 
