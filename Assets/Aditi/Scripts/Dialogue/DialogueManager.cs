@@ -312,34 +312,47 @@ public class DialogueManager : MonoBehaviour
         
         clicked = false;
         inTypeSentence = true;
-        // dialogueText.text = line;
-        dialogueText.text = "";
+        bool isAddingRichTextTag = false;
+        dialogueText.text = line;
+        dialogueText.maxVisibleCharacters = 0;
         foreach (char letter in line.ToCharArray())
         {
             if (clicked)
             {
-                dialogueText.text = line;
+                dialogueText.maxVisibleCharacters = line.Length;
                 inTypeSentence = false;
                 break;
             }
-            dialogueText.text += letter;
-            AudioManager.instance.sfx.PlayOneShot(AudioManager.instance.sfxDictionary["dialogue"]);
-
-            if (letter == ' ' || letter == '\n')
+            //handles rich text tags
+            if (letter == '<' || isAddingRichTextTag)
             {
-                continue;
-            }
-            else if (letter == '.' || letter == '?' || letter == ';' || letter == '!' || letter == '—' || letter == '-')
-            {
-                yield return new WaitForSeconds(typingSpeed * 2.4f);
-            }
-            else if (letter == ',')
-            {
-                yield return new WaitForSeconds(typingSpeed * 1.7f);
+                isAddingRichTextTag = true;
+                if (letter == '>')
+                {
+                    isAddingRichTextTag = false;
+                }
             }
             else
             {
-                yield return new WaitForSeconds(typingSpeed);
+                dialogueText.maxVisibleCharacters++;
+                AudioManager.instance.sfx.PlayOneShot(AudioManager.instance.sfxDictionary["dialogue"]);
+
+                if (letter == ' ' || letter == '\n')
+                {
+                    continue;
+                }
+                else if (letter == '.' || letter == '?' || letter == ';' || letter == '!' || letter == '—' || letter == '-')
+                {
+                    yield return new WaitForSeconds(typingSpeed * 2.4f);
+                }
+                else if (letter == ',')
+                {
+                    yield return new WaitForSeconds(typingSpeed * 1.7f);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(typingSpeed);
+                }
             }
         }
         inTypeSentence = false;
