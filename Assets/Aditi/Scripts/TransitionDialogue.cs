@@ -45,8 +45,8 @@ public class TransitionDialogue : MonoBehaviour
 
     public void StartDialogue()
     {
-        // level = // replace with getting actual level
-
+        level = LevelManager.Instance.level;
+        // level = 1; //DELETE
         dialogueQ.Clear();
         foreach (string line in data.dialogueLines[level].lines)
         {
@@ -58,7 +58,7 @@ public class TransitionDialogue : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !PauseManager.Instance.paused)
         {
             if (inTypeSentence)
             {
@@ -94,7 +94,9 @@ public class TransitionDialogue : MonoBehaviour
 
     public void EndDialogue()
     {
-        string nextScene = "Level" + (level+1).ToString();
+        // LevelManager.Instance.level += 1;
+        level = ++LevelManager.Instance.level;
+        string nextScene = "Level " + level.ToString();
         SceneManager.LoadScene(nextScene);
     }
 

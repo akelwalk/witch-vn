@@ -13,7 +13,7 @@ public class Click : MonoBehaviour
     }
     void OnMouseUp()
     {
-        if (!DialogueManager.instance.gameOver)
+        if (!PauseManager.Instance.paused && !DialogueManager.instance.gameOver)
         {
             trigger.startDialogue();
         }

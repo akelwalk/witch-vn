@@ -97,7 +97,7 @@ public class DialogueManager : MonoBehaviour
 
         //So now dialogue is playing
         // || Input.GetMouseButtonDown(0) i removed clicking for going through the dialogue
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)  && !PauseManager.Instance.paused)
         {
             if (inTypeSentence && !inChoice)
             {
@@ -152,7 +152,7 @@ public class DialogueManager : MonoBehaviour
         }
         else if (nextScene != "")
         {
-            SceneManager.LoadScene(nextScene);
+            SceneManager.LoadScene("Transition");
         }
     }
 
@@ -243,7 +243,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void DisplayChoices()
+    public void DisplayChoices()
     {
         List<Choice> currentChoices = currentStory.currentChoices;
         continueIcon.SetActive(true);
@@ -309,7 +309,6 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator TypeSentence(string line)
     {
-        
         clicked = false;
         inTypeSentence = true;
         bool isAddingRichTextTag = false;

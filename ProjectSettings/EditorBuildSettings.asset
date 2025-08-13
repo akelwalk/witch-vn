@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Aditi/Scenes/Level 3.unity
     guid: 038c97207356ded41b469f4ceb3feb4e
+  - enabled: 1
+    path: Assets/Aditi/Scenes/Transition.unity
+    guid: 804ac57368ac4394284ee648afa962f4
   m_configObjects: {}
