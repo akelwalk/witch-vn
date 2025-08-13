@@ -483,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3155626833371327401, guid: 44a69ed8cecbefe4d9661a9253f40122, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -30
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 3843428887593968828, guid: 44a69ed8cecbefe4d9661a9253f40122, type: 3}
       propertyPath: m_Name
@@ -492,6 +492,10 @@ PrefabInstance:
     - target: {fileID: 3843428887593968828, guid: 44a69ed8cecbefe4d9661a9253f40122, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4292332169039194063, guid: 44a69ed8cecbefe4d9661a9253f40122, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 6346451468651525670, guid: 44a69ed8cecbefe4d9661a9253f40122, type: 3}
       propertyPath: m_Pivot.x
@@ -795,18 +799,18 @@ PrefabInstance:
     - target: {fileID: 12395248358651005, guid: 8fc8b993e1b98ff4490022712b61fd6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2780273422510703572}
+      objectReference: {fileID: 6020214382783771780, guid: 158f417df2d80f2488188248cb2b549a, type: 3}
     - target: {fileID: 12395248358651005, guid: 8fc8b993e1b98ff4490022712b61fd6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CoroutineResumeGame
+      value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 12395248358651005, guid: 8fc8b993e1b98ff4490022712b61fd6a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseManager, Assembly-CSharp
+      value: CustomSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 104259902178184614, guid: 8fc8b993e1b98ff4490022712b61fd6a, type: 3}
       propertyPath: m_Name
-      value: Resume
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 104259902178184614, guid: 8fc8b993e1b98ff4490022712b61fd6a, type: 3}
       propertyPath: m_IsActive
@@ -814,7 +818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1075740645363714218, guid: 8fc8b993e1b98ff4490022712b61fd6a, type: 3}
       propertyPath: m_text
-      value: Resume
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 5554654431347092405, guid: 8fc8b993e1b98ff4490022712b61fd6a, type: 3}
       propertyPath: m_Pivot.x

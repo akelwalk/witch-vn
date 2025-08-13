@@ -107,7 +107,9 @@ MonoBehaviour:
     Continue Dialogue: Spacebar
 
     Select
-    Choice: Up/Down Arrow Keys and Spacebar'
+    Choice: Up/Down Arrow Keys and Spacebar or Click
+
+    Pause: Esc'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 557638fd4c3f59447a20f1dc63b4fa39, type: 2}
   m_sharedMaterial: {fileID: 1784507507913099669, guid: 557638fd4c3f59447a20f1dc63b4fa39, type: 2}

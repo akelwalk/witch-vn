@@ -12,6 +12,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject controls;
     [SerializeField] private GameObject buttons;
 
+    //this is the most cooked code i've ever wrote. i didnt think that making a pause menu would be so complicated
     public void Awake()
     {
         if (Instance != null)
@@ -24,16 +25,19 @@ public class PauseManager : MonoBehaviour
 
     public void Update()
     {
-        if (!DialogueManager.instance.gameOver && !DialogueManager.instance.gameFinished && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!paused)
-            {
-                PauseGame();
+            if (DialogueManager.instance != null && !DialogueManager.instance.gameOver && !DialogueManager.instance.gameFinished) {
+                if (!paused)
+                {
+                    PauseGame();
+                }
+                else
+                {
+                    CoroutineResumeGame();
+                }
             }
-            else
-            {
-                CoroutineResumeGame();
-            }
+            
         }
     }
 
